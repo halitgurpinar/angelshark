@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_name" default="angelshark" />
+
+    <include file="$(find angelshark)/launch/rplidar.launch">
+        <arg name="robot_name" value="$(arg robot_name)" />
+    </include>
+    
+    <include file="$(find angelshark)/launch/serial.launch">
+        <arg name="robot_name" value="$(arg robot_name)" />
+    </include>
+    
+    <include file="$(find angelshark)/launch/static_transform_publisher.launch">
+        <arg name="robot_name" value="$(arg robot_name)" />
+    </include>
+</launch>
