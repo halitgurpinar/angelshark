@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_name" value="angelshark"/>
+    <arg name="cam_dev" value="/dev/video0"/>
+    <arg name="img_show" default="true"/>
+
+    <include file="$(find angelshark)/launch/bringup.launch">
+        <arg name="robot_name" default="$(arg robot_name)"/>
+        <arg name="cam_dev" value="/dev/video0"/>
+        <arg name="img_show" default="true"/>
+    </include>
+  
+    <node name="angelshark_keyboard_teleop" pkg="angelshark" type="angelshark_keyboard_teleop.py" respawn="true" output="screen">
+        <param name="topic" type="string" value="/$(arg robot_name)/cmd_vel" />
+    </node>
+</launch>
