@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="joy_dev" default="/dev/input/js0" />
+    <arg name="robot_name" value="angelshark"/>
+    <arg name="cam_dev" value="/dev/video0"/>
+    <arg name="img_show" default="true"/>
+
+    <include file="$(find angelshark)/launch/bringup.launch">
+        <arg name="robot_name" default="$(arg robot_name)"/>
+        <arg name="cam_dev" value="/dev/video0"/>
+        <arg name="img_show" default="true"/>
+    </include>
+    
+    <!-- Joy node -->
+    <node respawn="true" pkg="joy" type="joy_node" name="angelshark_joy" >
+        <param name="dev" type="string" value="$(arg joy_dev)" />
+        <param name="deadzone" value="0.12" />
+    </node>
+
+    <!--angelshark Joy Node-->
+    <node pkg="angelshark" name="angelshark_joystick" type="angelshark_joy.py" output="screen"></node>
+</launch>
