@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>Angelshark</name>
+  <name>angelshark</name>
   <version>1.0.0</version>
   <description>A ROS based self driving hydrogen vehicle using Nvidia jetson nano, Rplidar A2, CSI Camera</description>
 
