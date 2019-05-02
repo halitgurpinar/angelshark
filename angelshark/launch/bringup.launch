@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="robot_name" default="angelshark" />
+    <arg name="cam_dev" value="/dev/video0"/>
+    <arg name="img_show" default="true"/>
 
     <include file="$(find angelshark)/launch/rplidar.launch">
         <arg name="robot_name" value="$(arg robot_name)" />
@@ -13,4 +15,11 @@
     <include file="$(find angelshark)/launch/static_transform_publisher.launch">
         <arg name="robot_name" value="$(arg robot_name)" />
     </include>
+    
+    <include file="$(find angelshark)/launch/camera_publisher.launch">
+        <arg name="robot_name" value="$(arg robot_name)" />
+        <arg name="device" default="$(arg cam_dev)"/>
+        <arg name="show" default="$(arg img_show)"/>
+    </include>
+    
 </launch>
