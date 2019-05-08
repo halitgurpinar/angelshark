@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<sdf version='1.5'>
+  <model name='pars'>
+    <!-- Pars body -->
+    <link name='body'>
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.5 0 0 0</pose>
+        <mass>90.0</mass>
+        <inertia>
+          <ixx>1.5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.0</iyy>
+          <iyz>0</iyz>
+          <izz>1.0</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_inertia_collision'>
+        <pose>0 -0.04 0.6 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.4 2.7 0.9</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_inertia_visual'>
+        <pose>0 0 0.13 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.16 0.16 0.16</scale>
+            <uri>model://pars/meshes/pars.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay/>
+      <self_collide>0</self_collide>
+    </link>
+    
+    <link name="imu">
+      <pose>0.0 1.15 0.30 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.015</mass>
+        <inertia>
+          <ixx>1e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-05</iyy>
+          <iyz>0</iyz>
+          <izz>1e-05</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <joint name='imu_joint' type='revolute'>
+      <child>imu</child>
+      <parent>body</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    
+    <link name="front_left_wheel">
+        <pose>-0.55 0.74 0.30 0 1.5707 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.9</mass>
+          <inertia>
+            <ixx>0.03</ixx>
+            <ixy>0.00</ixy>
+            <ixz>0.00</ixz>
+            <iyy>0.03</iyy>
+            <iyz>0.00</iyz>
+            <izz>0.057</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.2932</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.2932</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+    </link>
+    <link name="front_right_wheel">
+        <pose>0.55 0.74 0.30 0 1.5707 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.9</mass>
+          <inertia>
+            <ixx>0.03</ixx>
+            <ixy>0.00</ixy>
+            <ixz>0.00</ixz>
+            <iyy>0.03</iyy>
+            <iyz>0.00</iyz>
+            <izz>0.057</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.2932</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.2932</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+    </link>
+    <link name="rear_left_wheel">
+        <pose>-0.30 -0.70 0.30 0 1.5707 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.9</mass>
+          <inertia>
+            <ixx>0.03</ixx>
+            <ixy>0.00</ixy>
+            <ixz>0.00</ixz>
+            <iyy>0.03</iyy>
+            <iyz>0.00</iyz>
+            <izz>0.057</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.2932</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.2932</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+    </link>
+    <link name="rear_right_wheel">
+        <pose>0.30 -0.70 0.30 0 1.5707 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.9</mass>
+          <inertia>
+            <ixx>0.03</ixx>
+            <ixy>0.00</ixy>
+            <ixz>0.00</ixz>
+            <iyy>0.03</iyy>
+            <iyz>0.00</iyz>
+            <izz>0.057</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.2932</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.2932</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+    </link>
+    
+    <link name="FLwheel_steer">
+      <pose>-0.55 0.74 0.30 0 1.5707 0</pose>
+      <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0</mass>
+          <inertia>
+            <ixx>0.0</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>0.0</iyy>
+            <iyz>0.0</iyz>
+            <izz>0.0</izz>
+          </inertia>
+        </inertial>
+    </link>
+    <link name="FRwheel_steer">
+      <pose>0.55 0.74 0.30 0 1.5707 0</pose>
+      <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0</mass>
+          <inertia>
+            <ixx>0.0</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>0.0</iyy>
+            <iyz>0.0</iyz>
+            <izz>0.0</izz>
+          </inertia>
+        </inertial>
+    </link>
+    
+    <joint name="jFRsteer" type="revolute">
+      <parent>body</parent>
+      <child>FRwheel_steer</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <upper>0.8</upper>
+          <lower>-0.8</lower>
+        </limit>
+        <dynamics>
+          <friction>2.0</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint name="jFLsteer" type="revolute">
+      <parent>body</parent>
+      <child>FLwheel_steer</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <upper>0.8</upper>
+          <lower>-0.8</lower>
+        </limit>
+        <dynamics>
+          <friction>2.0</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <joint name="jFR" type="revolute">
+      <parent>FRwheel_steer</parent>
+      <child>front_right_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint name="jFL" type="revolute">
+      <parent>FLwheel_steer</parent>
+      <child>front_left_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="jRR" type="revolute">
+        <parent>body</parent>
+        <child>rear_right_wheel</child>
+        <axis>
+            <xyz>0 0 1</xyz>
+        </axis>
+    </joint>
+    <joint name="jRL" type="revolute">
+        <parent>body</parent>
+        <child>rear_left_wheel</child>
+        <axis>
+            <xyz>0 0 1</xyz>
+        </axis>
+    </joint>
+    
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/pars</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+    <plugin name='rosbag' filename='libgazebo_multirotor_base_plugin.so'>
+      <robotNamespace></robotNamespace>
+      <linkName>body</linkName>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    </plugin>
+    <!--<plugin name='rear_left_motor' filename='libgazebo_motor_model.so'>
+      <robotNamespace></robotNamespace>
+      <jointName>jRL</jointName>
+      <linkName>rear_left_wheel</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <motorSpeedPubTopic>/motor_speed/0</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    </plugin>
+    <plugin name="gps_plugin" filename="libgazebo_gps_plugin.so">
+        <robotNamespace></robotNamespace>
+        <gpsNoise>false</gpsNoise>
+    </plugin>-->
+    <plugin name='gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
+      <robotNamespace></robotNamespace>
+      <linkName>imu</linkName>
+      <imuTopic>/imu</imuTopic>
+      <gyroscopeNoiseDensity>0.0003394</gyroscopeNoiseDensity>
+      <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
+      <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
+      <gyroscopeTurnOnBiasSigma>0.0087</gyroscopeTurnOnBiasSigma>
+      <accelerometerNoiseDensity>0.004</accelerometerNoiseDensity>
+      <accelerometerRandomWalk>0.006</accelerometerRandomWalk>
+      <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
+      <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
+    </plugin>
+  </model>
+</sdf>
