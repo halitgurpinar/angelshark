@@ -1,0 +1,177 @@
+<?xml version="1.0" ?>
+<robot name="pars">
+  <joint name="pars__imu_joint" type="fixed">
+    <parent link="pars__body"/>
+    <child link="pars__imu"/>
+    <origin rpy="0 0 0" xyz="0      1.14999 0.3"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="0.0" lower="0.0" upper="0.0" velocity="0.0"/>
+  </joint>
+  <joint name="pars__jFRsteer" type="revolute">
+    <parent link="pars__body"/>
+    <child link="pars__FRwheel_steer"/>
+    <origin rpy="0     1.5707 0" xyz="0.55 0.74 0.3"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="0.0" lower="-0.8" upper="0.8" velocity="0.0"/>
+  </joint>
+  <joint name="pars__jFLsteer" type="revolute">
+    <parent link="pars__body"/>
+    <child link="pars__FLwheel_steer"/>
+    <origin rpy="0     1.5707 0" xyz="-0.55  0.74  0.3"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="0.0" lower="-0.8" upper="0.8" velocity="0.0"/>
+  </joint>
+  <joint name="pars__jFR" type="fixed">
+    <parent link="pars__FRwheel_steer"/>
+    <child link="pars__front_right_wheel"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="pars__jFL" type="fixed">
+    <parent link="pars__FLwheel_steer"/>
+    <child link="pars__front_left_wheel"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="pars__jRR" type="fixed">
+    <parent link="pars__body"/>
+    <child link="pars__rear_right_wheel"/>
+    <origin rpy="0     1.5707 0" xyz="0.3 -0.7  0.3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="pars__jRL" type="fixed">
+    <parent link="pars__body"/>
+    <child link="pars__rear_left_wheel"/>
+    <origin rpy="0     1.5707 0" xyz="-0.3 -0.7  0.3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <link name="pars__body">
+    <inertial>
+      <mass value="92.0"/>
+      <origin rpy="0 0 0" xyz="0  0  0.6"/>
+      <inertia ixx="0.7" ixy="0" ixz="0" iyy="0.2" iyz="0" izz="0.8"/>
+    </inertial>
+    <collision name="pars__base_link_inertia_collision">
+      <origin rpy="0 0 0" xyz="0   0   0.13"/>
+      <geometry>
+        <mesh filename="package://angelshark_sim/models/angelshark/meshes/pars.stl" scale="0.16 0.16 0.16"/>
+      </geometry>
+    </collision>
+    <visual name="pars__base_link_inertia_visual">
+      <origin rpy="0 0 0" xyz="0   0   0.13"/>
+      <geometry>
+        <mesh filename="package://angelshark_sim/models/angelshark/meshes/pars.stl" scale="0.16 0.16 0.16"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__imu">
+    <inertial>
+      <mass value="0.015"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+  </link>
+  <link name="pars__front_left_wheel">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+    <collision name="pars__collision">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </collision>
+    <visual name="pars__visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__front_right_wheel">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+    <collision name="pars__collision">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </collision>
+    <visual name="pars__visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__rear_left_wheel">
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+    <collision name="pars__collision">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </collision>
+    <visual name="pars__visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__rear_right_wheel">
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+    <collision name="pars__collision">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </collision>
+    <visual name="pars__visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__FLwheel_steer">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+  </link>
+  <link name="pars__FRwheel_steer">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+  </link>
+  
+  <!--                GAZEBO RELATED PART                             -->
+ 
+  <!-- ROS Control plugin for Gazebo -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/pars</robotNamespace>
+    </plugin>
+  </gazebo>
+</robot>
