@@ -44,13 +44,6 @@
       </geometry>
     </visual>
   </link>
-  <link name="pars__imu">
-    <inertial>
-      <mass value="0.015"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
-    </inertial>
-  </link>
   <link name="pars__front_left_wheel">
     <inertial>
       <mass value="1.0"/>
@@ -142,13 +135,6 @@
     </inertial>
   </link>
   
-  <joint name="pars__imu_joint" type="fixed">
-    <parent link="pars__body"/>
-    <child link="pars__imu"/>
-    <origin rpy="0 0 0" xyz="0      1.14999 0.3"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="0.0" lower="0.0" upper="0.0" velocity="0.0"/>
-  </joint>
   <joint name="pars__jFRsteer" type="revolute">
     <parent link="pars__body"/>
     <child link="pars__FRwheel_steer"/>
