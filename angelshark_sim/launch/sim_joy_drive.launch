@@ -6,7 +6,6 @@
     
     <rosparam file="$(find angelshark_sim)/config/pars_control.yaml" command="load"/>
 
-<!--     <arg name="model" default="$(find angelshark_sim)/models/pars/pars.sdf"/> -->
     <arg name="world" default="$(find angelshark_sim)/worlds/mcity.world"/>
     <arg name="joy_dev" default="/dev/input/js0" />
     <arg name="x" default="16.31"/>
@@ -22,11 +21,7 @@
         <arg name="world_name" value="$(arg world)"/>
     </include>
 
-    <!--<node pkg="fake_localization" type="fake_localization" name="fake_localization">
-        <remap from="base_pose_ground_truth" to="/prius/base_pose_ground_truth"/>
-    </node>-->
-
-    <node pkg="tf2_ros" type="static_transform_publisher" name="very_inaccurate_odom" args="0 0 0 0 0 0 odom base_link"/>
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="very_inaccurate_odom" args="0 0 0 0 0 0 odom base_link"/>-->
 
     <!-- Joy node -->
     <node respawn="true" pkg="joy" type="joy_node" name="angelshark_joy" >
@@ -36,18 +31,22 @@
 
     <!--angelshark_sim Joy Node-->
 <!--     <node pkg="angelshark_sim" name="angelshark_joystick" type="angelshark_joy.py" output="screen"></node> -->
-
+    
+    <param name="robot_description" textfile="$(find angelshark_sim)/urdf/pars.urdf" />
+ 
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model pars -param robot_description -x $(arg x) -y $(arg y) -z $(arg z)"/>
+    <!-- load the controllers -->
+    <rosparam file="$(find angelshark_sim)/config/pars_control.yaml" command="load"/>
+    <node name="controller_manager" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" ns="/pars" args="left_rear_wheel_velocity_controller right_rear_wheel_velocity_controller
+                                              left_front_wheel_velocity_controller right_front_wheel_velocity_controller
+                                              left_steering_hinge_position_controller right_steering_hinge_position_controller
+                                              joint_state_controller"/>
+    
     <!-- convert joint states to TF transforms for rviz, etc -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
         <remap from="/joint_states" to="/pars/joint_states" />
     </node>
-    
-    <param name="robot_decription" textfile="$(find angelshark_sim)/urdf/pars.urdf" />
- 
-    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model simple_model -param robot_description -x $(arg x) -y $(arg y) -z $(arg z)"/>
-    <!-- load the controllers -->
-    <rosparam file="$(find angelshark_sim)/config/pars_control.yaml" command="load"/>
-    <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="/pars" args="base_to_second_joint_position_controller joint_state_controller --shutdown-timeout 3"/>
     
     <node pkg="angelshark_sim" type="servo_commands.py" name="servo_commands" output="screen" />
     
