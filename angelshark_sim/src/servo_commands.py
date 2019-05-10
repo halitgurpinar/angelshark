@@ -33,7 +33,7 @@ def servo_commands():
 
     rospy.init_node('servo_commands', anonymous=True)
 
-    rospy.Subscriber("ackermann_cmd", AckermannDriveStamped, set_throttle_steer)
+    rospy.Subscriber("angelshark/ackermann_cmd", AckermannDriveStamped, set_throttle_steer)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
