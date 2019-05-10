@@ -12,9 +12,9 @@ def set_throttle_steer(data):
     global flag_move
 
     pub_vel_left_rear_wheel = rospy.Publisher('/pars/left_rear_wheel_velocity_controller/command', Float64, queue_size=1)
-    pub_vel_right_rear_wheel = rospy.Publisher('/pars/right_rear_wheel_velocity_controller/command', Float64, queue_size=1)
-    pub_vel_left_front_wheel = rospy.Publisher('/pars/left_front_wheel_velocity_controller/command', Float64, queue_size=1)
-    pub_vel_right_front_wheel = rospy.Publisher('/pars/right_front_wheel_velocity_controller/command', Float64, queue_size=1)
+    #pub_vel_right_rear_wheel = rospy.Publisher('/pars/right_rear_wheel_velocity_controller/command', Float64, queue_size=1)
+    #pub_vel_left_front_wheel = rospy.Publisher('/pars/left_front_wheel_velocity_controller/command', Float64, queue_size=1)
+    #pub_vel_right_front_wheel = rospy.Publisher('/pars/right_front_wheel_velocity_controller/command', Float64, queue_size=1)
 
     pub_pos_left_steering_hinge = rospy.Publisher('/pars/left_steering_hinge_position_controller/command', Float64, queue_size=1)
     pub_pos_right_steering_hinge = rospy.Publisher('/pars/right_steering_hinge_position_controller/command', Float64, queue_size=1)
@@ -23,9 +23,9 @@ def set_throttle_steer(data):
     steer = data.drive.steering_angle
 
     pub_vel_left_rear_wheel.publish(throttle)
-    pub_vel_right_rear_wheel.publish(throttle)
-    pub_vel_left_front_wheel.publish(throttle)
-    pub_vel_right_front_wheel.publish(throttle)
+    #pub_vel_right_rear_wheel.publish(throttle)
+    #pub_vel_left_front_wheel.publish(throttle)
+    #pub_vel_right_front_wheel.publish(throttle)
     pub_pos_left_steering_hinge.publish(steer)
     pub_pos_right_steering_hinge.publish(steer)
 
