@@ -154,42 +154,42 @@
     <child link="pars__FRwheel_steer"/>
     <origin rpy="0     1.5707 0" xyz="0.55 0.74 0.3"/>
     <axis xyz="1 0 0"/>
-    <limit effort="0.0" lower="-0.8" upper="0.8" velocity="0.0"/>
+    <limit effort="10.0" lower="-1.0" upper="1.0" velocity="30"/>
   </joint>
   <joint name="pars__jFLsteer" type="revolute">
     <parent link="pars__body"/>
     <child link="pars__FLwheel_steer"/>
     <origin rpy="0     1.5707 0" xyz="-0.55  0.74  0.3"/>
     <axis xyz="1 0 0"/>
-    <limit effort="0.0" lower="-0.8" upper="0.8" velocity="0.0"/>
+    <limit effort="10.0" lower="-1.0" upper="1.0" velocity="30"/>
   </joint>
-  <joint name="pars__jFR" type="revolute">
+  <joint name="pars__jFR" type="continuous">
     <parent link="pars__FRwheel_steer"/>
     <child link="pars__front_right_wheel"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="0" lower="0" upper="0" velocity="0"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="30"/>
   </joint>
-  <joint name="pars__jFL" type="revolute">
+  <joint name="pars__jFL" type="continuous">
     <parent link="pars__FLwheel_steer"/>
     <child link="pars__front_left_wheel"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="0" lower="0" upper="0" velocity="0"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="30"/>
   </joint>
-  <joint name="pars__jRR" type="revolute">
+  <joint name="pars__jRR" type="continuous">
     <parent link="pars__body"/>
     <child link="pars__rear_right_wheel"/>
     <origin rpy="0     1.5707 0" xyz="0.3 -0.7  0.3"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="0" lower="0" upper="0" velocity="0"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="30"/>
   </joint>
-  <joint name="pars__jRL" type="revolute">
+  <joint name="pars__jRL" type="continuous">
     <parent link="pars__body"/>
     <child link="pars__rear_left_wheel"/>
     <origin rpy="0     1.5707 0" xyz="-0.3 -0.7  0.3"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="0" lower="0" upper="0" velocity="0"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="30"/>
   </joint>
   
   <!--                GAZEBO RELATED PART                             -->
@@ -198,68 +198,77 @@
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/pars</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>pars__body</bodyName>
+      <topicName>pars/imu</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <updateRate>20.0</updateRate>
     </plugin>
   </gazebo>
   
   <transmission name="FRsteer_transmission" type="SimpleTransmission">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="FRsteerMotor">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
-    <joint name="pars__FRwheel_steer">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <joint name="pars__jFRsteer">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
   <transmission name="FLsteer_transmission" type="SimpleTransmission">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="FLsteerMotor">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
-    <joint name="pars__FLwheel_steer">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <joint name="pars__jFLsteer">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
   
   <transmission name="FR_transmission" type="SimpleTransmission">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="FRMotor">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="pars__jFR">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
   <transmission name="FL_transmission" type="SimpleTransmission">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="FLMotor">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="pars__jFL">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
   <transmission name="RR_transmission" type="SimpleTransmission">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="RRMotor">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="pars__jRR">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
   <transmission name="RL_transmission" type="SimpleTransmission">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="RLMotor">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="pars__jRL">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
 
