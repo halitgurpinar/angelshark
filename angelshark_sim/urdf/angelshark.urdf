@@ -1,0 +1,361 @@
+<?xml version="1.0" ?>
+<robot name="angelshark">
+  
+  <link name="pars__body">
+    <inertial>
+      <mass value="92.0"/>
+      <origin rpy="0 0 0" xyz="0  0  0.6"/>
+      <inertia ixx="0.7" ixy="0" ixz="0" iyy="0.2" iyz="0" izz="0.8"/>
+    </inertial>
+    <collision name="pars__base_link_inertia_collision">
+      <origin rpy="0 0 1.5707" xyz="0   0   0.13"/>
+      <geometry>
+        <mesh filename="package://angelshark_sim/models/angelshark/meshes/pars.stl" scale="0.16 0.16 0.16"/>
+      </geometry>
+    </collision>
+    <visual name="pars__base_link_inertia_visual">
+      <origin rpy="0 0 1.5707" xyz="0   0   0.13"/>
+      <geometry>
+        <mesh filename="package://angelshark_sim/models/angelshark/meshes/pars.stl" scale="0.16 0.16 0.16"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__front_left_wheel">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+    <collision name="pars__collision">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </collision>
+    <visual name="pars__visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__front_right_wheel">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+    <collision name="pars__collision">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </collision>
+    <visual name="pars__visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__rear_left_wheel">
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+    <collision name="pars__collision">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </collision>
+    <visual name="pars__visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__rear_right_wheel">
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+    <collision name="pars__collision">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </collision>
+    <visual name="pars__visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length=".05" radius=".2932"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pars__FLwheel_steer">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+  </link>
+  <link name="pars__FRwheel_steer">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+    </inertial>
+  </link>
+  <!-- Laser scanner -->
+  <link name="laser">
+    <inertial>
+      <mass value="0.130" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <inertia ixx="4E-06" ixy="0" ixz="0" iyy="4E-06" iyz="0" izz="4E-06" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://angelshark_sim/models/hokuyo/meshes/hokuyo.dae"/>
+        <material name="grey" />
+      </geometry>
+    </visual>
+  </link>
+  <!-- Camera -->
+  <link name="camera_link">
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.009 0.023 0.023"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.009 0.023 0.023"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+  
+  <joint name="pars__jFRsteer" type="revolute">
+    <parent link="pars__body"/>
+    <child link="pars__FRwheel_steer"/>
+    <origin rpy="0     1.5707 0" xyz="0.55 0.74 0.3"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10.0" lower="-0.5235987756" upper="0.5235987756" velocity="30"/>
+  </joint>
+  <joint name="pars__jFLsteer" type="revolute">
+    <parent link="pars__body"/>
+    <child link="pars__FLwheel_steer"/>
+    <origin rpy="0     1.5707 0" xyz="-0.55  0.74  0.3"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10.0" lower="-0.5235987756" upper="0.5235987756" velocity="30"/>
+  </joint>
+  <joint name="pars__jFR" type="continuous">
+    <parent link="pars__FRwheel_steer"/>
+    <child link="pars__front_right_wheel"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="30"/>
+  </joint>
+  <joint name="pars__jFL" type="continuous">
+    <parent link="pars__FLwheel_steer"/>
+    <child link="pars__front_left_wheel"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="30"/>
+  </joint>
+  <joint name="pars__jRR" type="continuous">
+    <parent link="pars__body"/>
+    <child link="pars__rear_right_wheel"/>
+    <origin rpy="0     1.5707 0" xyz="0.3 -0.7  0.3"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="30"/>
+  </joint>
+  <joint name="pars__jRL" type="continuous">
+    <parent link="pars__body"/>
+    <child link="pars__rear_left_wheel"/>
+    <origin rpy="0     1.5707 0" xyz="-0.3 -0.7  0.3"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="30"/>
+  </joint>
+  <joint name="hokuyo_joint" type="fixed">
+    <parent link="pars__body" />
+    <child link="laser" />
+    <origin xyz="0.0 1.27 0.4" rpy="0 0 1.5707963268"/>
+    <axis xyz="0 0 1" />
+  </joint>
+  <joint name="camera_joint" type="fixed">
+    <parent link="pars__body"/>
+    <child link="camera_link"/>
+    <origin xyz="0.0 0.8 0.67" rpy="0 0 1.5707963268"/>
+    <axis xyz="0 1 0" />
+  </joint>
+  
+  <!--                GAZEBO RELATED PART                             -->
+  <!-- ROS plugins for Gazebo -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/angelshark</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>pars__body</bodyName>
+      <topicName>angelshark/imu</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <updateRate>20.0</updateRate>
+    </plugin>
+  </gazebo>
+  <gazebo reference="laser">
+    <material>Gazebo/Black</material>
+    <sensor type="ray" name="hokuyo_sensor">
+      <pose>0 0 0.0124 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>190</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.6580627894</min_angle>
+            <max_angle>1.6580627894</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.15</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/angelshark/scan</topicName>
+        <frameName>laser</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera1">
+      <visualize>true</visualize>
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1,274590164</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>angelshark/camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+  
+  <transmission name="FRsteer_transmission" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="FRsteerMotor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="pars__jFRsteer">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <transmission name="FLsteer_transmission" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="FLsteerMotor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="pars__jFLsteer">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+  <transmission name="FR_transmission" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="FRMotor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="pars__jFR">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <transmission name="FL_transmission" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="FLMotor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="pars__jFL">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <transmission name="RR_transmission" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="RRMotor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="pars__jRR">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <transmission name="RL_transmission" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="RLMotor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="pars__jRL">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+</robot>
