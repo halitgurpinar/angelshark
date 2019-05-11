@@ -14,6 +14,7 @@
 
   <author email="halitgurpinar@gmail.com">Halit Gurpinar</author>
   <author email="rootofarch@gmail.com">Hüseyin Erdem</author> 
+  <author email="behcet.senturk@protonmail.com">Behçet Şentürk</author> 
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>geometry_msgs</build_depend>
