@@ -2,7 +2,7 @@
 <package>
   <name>angelshark_deeplearning</name>
   <version>1.0.0</version>
-  <description>A ROS based self driving hydrogen vehicles simulation package</description>
+  <description>A ROS based self driving hydrogen vehicles deep learning package</description>
 
   <maintainer email="halitgurpinar@gmail.com">Halit Gurpinar</maintainer>
   <maintainer email="rootofarch@gmail.com">Huseyin Erdem</maintainer>
