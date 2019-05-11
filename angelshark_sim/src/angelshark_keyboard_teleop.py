@@ -38,7 +38,7 @@ class AckermannDriveKeyop:
         for key in key_bindings:
             key_bindings[key] = \
                     (key_bindings[key][0] * float(max_speed) / 16,
-                     key_bindings[key][1] * float(max_steering_angle) / 5)
+                     key_bindings[key][1] * float(max_steering_angle) / 10)
 
         self.speed = 0
         self.steering_angle = 0
