@@ -41,6 +41,9 @@
     </node>
     
     <node pkg="angelshark_sim" type="servo_commands.py" name="servo_commands" output="screen" />
+    
+    <!-- Allow for Gazebo to broadcast odom -->
+    <node pkg="angelshark_sim" name="gazebo_odometry_node" type="gazebo_odometry.py"/>
 
     <!--   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" /> -->
     
