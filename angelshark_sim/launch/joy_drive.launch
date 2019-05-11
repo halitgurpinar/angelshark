@@ -21,14 +21,13 @@
 
     <!--<node pkg="tf2_ros" type="static_transform_publisher" name="very_inaccurate_odom" args="0 0 0 0 0 0 odom base_link"/>-->
 
+    <node pkg="angelshark_sim" name="angelshark_img_show" type="show_image.py" output="screen"></node>
+    
     <!-- Joy node -->
     <node respawn="true" pkg="joy" type="joy_node" name="angelshark_joy" >
         <param name="dev" type="string" value="$(arg joy_dev)" />
         <param name="deadzone" value="0.12" />
     </node>
-
-    <!--angelshark_sim Joy Node-->
-<!--     <node pkg="angelshark_sim" name="angelshark_joystick" type="angelshark_joy.py" output="screen"></node> -->
     
     <param name="robot_description" textfile="$(find angelshark_sim)/urdf/angelshark.urdf" />
  
@@ -47,6 +46,9 @@
     </node>
     
     <node pkg="angelshark_sim" type="servo_commands.py" name="servo_commands" output="screen" />
+    
+    <!--angelshark_sim Joy Node-->
+    <node pkg="angelshark_sim" name="ackermann_drive_joyop_node" type="angelshark_joy.py" respawn="true" output="screen" ></node>
     
     <!--   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" /> -->
 </launch>
