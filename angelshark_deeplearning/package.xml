@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>angelshark_sim</name>
+  <name>angelshark_deeplearning</name>
   <version>1.0.0</version>
-  <description>A ROS based self driving hydrogen vehicles simulation package</description>
+  <description>A ROS based self driving hydrogen vehicles deep learning package</description>
 
   <maintainer email="halitgurpinar@gmail.com">Halit Gurpinar</maintainer>
   <maintainer email="rootofarch@gmail.com">Huseyin Erdem</maintainer>
@@ -14,6 +14,7 @@
 
   <author email="halitgurpinar@gmail.com">Halit Gurpinar</author>
   <author email="rootofarch@gmail.com">Hüseyin Erdem</author> 
+  <author email="behcet.senturk@protonmail.com">Behçet Şentürk</author> 
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>geometry_msgs</build_depend>
