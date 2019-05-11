@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="angelshark">
   
+  <link name="pars__base_link"></link>
   <link name="pars__body">
     <inertial>
       <mass value="92.0"/>
@@ -153,6 +154,12 @@
     </visual>
   </link>
   
+  <joint name="pars__base_joint" type="fixed">
+    <parent link="pars__base_link"/>
+    <child link="pars__body"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+  </joint>
   <joint name="pars__jFRsteer" type="revolute">
     <parent link="pars__body"/>
     <child link="pars__FRwheel_steer"/>
