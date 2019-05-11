@@ -35,7 +35,7 @@ class AckermannDriveKeyop:
             max_speed = float(args[0])
             max_steering_angle = float(args[1])
         else:
-            max_speed = 5.0
+            max_speed = 8.0
             max_steering_angle = 2.5
 
         if len(args) > 2:
@@ -48,7 +48,7 @@ class AckermannDriveKeyop:
                                      float(max_steering_angle)]
         for key in key_bindings:
             key_bindings[key] = \
-                    (key_bindings[key][0] * float(max_speed) / 5,
+                    (key_bindings[key][0] * float(max_speed) / 16,
                      key_bindings[key][1] * float(max_steering_angle) / 5)
 
         self.speed = 0
