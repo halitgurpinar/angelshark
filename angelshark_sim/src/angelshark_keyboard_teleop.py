@@ -27,21 +27,10 @@ key_bindings = {
 
 class AckermannDriveKeyop:
 
-    def __init__(self, args):
-        if len(args) == 1:
-            max_speed = float(args[0])
-            max_steering_angle = float(args[0])
-        elif len(args) >= 2:
-            max_speed = float(args[0])
-            max_steering_angle = float(args[1])
-        else:
-            max_speed = 8.0
-            max_steering_angle = 2.5
-
-        if len(args) > 2:
-            cmd_topic = '/' + args[2]
-        else:
-            cmd_topic = 'angelshark/ackermann_cmd'
+    def __init__(self):
+        max_speed = 8.0
+        max_steering_angle = 2.5
+        cmd_topic = 'angelshark/ackermann_cmd'
 
         self.speed_range = [-float(max_speed), float(max_speed)]
         self.steering_angle_range = [-float(max_steering_angle),
@@ -122,4 +111,4 @@ class AckermannDriveKeyop:
 
 if __name__ == '__main__':
     rospy.init_node('ackermann_drive_keyop_node')
-    keyop = AckermannDriveKeyop(sys.argv[1:len(sys.argv)])
+    keyop = AckermannDriveKeyop()

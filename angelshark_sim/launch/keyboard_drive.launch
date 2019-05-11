@@ -4,7 +4,6 @@
     <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find angelshark_sim)/models"/>
     <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find angelshark_sim)/models"/>
 
-    <arg name="joy_dev" default="/dev/input/js0" />
     <arg name="gui" default="false"/>
     <arg name="verbose" default="true"/>
 
@@ -15,13 +14,7 @@
 
     <node pkg="angelshark_sim" name="angelshark_img_show" type="show_image.py" output="screen"></node>
 
-    <!-- Joy node -->
-    <node respawn="true" pkg="joy" type="joy_node" name="angelshark_joy" >
-        <param name="dev" type="string" value="$(arg joy_dev)" />
-        <param name="deadzone" value="0.12" />
-    </node>
-    
-    <!--angelshark_sim Joy Node-->
-    <node pkg="angelshark_sim" name="ackermann_drive_joyop_node" type="angelshark_joy.py" respawn="true" output="screen" ></node>
+    <!--angelshark_sim Keyboard Teleop Node-->
+    <node pkg="angelshark_sim" name="ackermann_drive_keyop_node" type="angelshark_keyboard_teleop.py" respawn="true" output="screen" ></node>
     
 </launch>
