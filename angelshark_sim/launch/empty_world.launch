@@ -8,12 +8,12 @@
     <arg name="gui" default="true"/>
     <arg name="verbose" default="true"/>
     
-    <arg name="x" default="16.31"/>
-    <arg name="y" default="-221.63"/>
-    <arg name="z" default="1.5"/>
+    <arg name="x" default="0.0"/>
+    <arg name="y" default="0.0"/>
+    <arg name="z" default="0.0"/>
     <arg name="roll" default="0"/>
     <arg name="pitch" default="0"/>
-    <arg name="yaw" default="-0,628294"/>
+    <arg name="yaw" default="0,0"/>
     <!--   <arg name="rvizconfig" default="$(find car_demo)/rviz/demo.rviz" /> -->
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
