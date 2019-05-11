@@ -1,34 +1,62 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import rospy
-from geometry_msgs.msg import Twist
+from ackermann_msgs.msg import AckermannDrive
 from sensor_msgs.msg import Joy
-import math
+import sys
+
+class AckermannDriveJoyop:
+
+    def __init__(self, args):
+        if len(args)==1 or len(args)==2:
+            self.max_speed = float(args[0])
+            self.max_steering_angle = float(args[len(args)-1])
+            cmd_topic = 'angelshark/ackermann_cmd'
+        elif len(args) == 3:
+            self.max_speed = float(args[0])
+            self.max_steering_angle = float(args[1])
+            cmd_topic = '/' + args[2]
+        else:
+            self.max_speed = 5.0
+            self.max_steering_angle = 2.5
+            cmd_topic = 'angelshark/ackermann_cmd'
+
+        self.speed = 0
+        self.steering_angle = 0
+        self.joy_sub = rospy.Subscriber('/joy', Joy, self.joy_callback)
+        self.drive_pub = rospy.Publisher(cmd_topic, AckermannDrive,
+                                         queue_size=1)
+        rospy.Timer(rospy.Duration(1.0/5.0), self.pub_callback, oneshot=False)
+        rospy.loginfo('ackermann_drive_joyop_node initialized')
+
+    def joy_callback(self, joy_msg):
+        self.speed = joy_msg.axes[2] * self.max_speed;
+        self.steering_angle = joy_msg.axes[3] * self.max_steering_angle;
 
 
-cmdvel = rospy.Publisher("/angelshark/cmd_vel", Twist, queue_size=1)
+    def pub_callback(self, event):
+        ackermann_cmd_msg = AckermannDrive()
+        ackermann_cmd_msg.speed = self.speed
+        ackermann_cmd_msg.steering_angle = self.steering_angle
+        self.drive_pub.publish(ackermann_cmd_msg)
+        self.print_state()
 
-def callback(data):
-    global cmdvel
-    
-    hrz = data.axes[1]
-    vrt = data.axes[3]
-    movement_msg = Twist()
-    movement_msg.linear.x = hrz*10
-    movement_msg.angular.z = vrt*3
-    cmdvel.publish(movement_msg)
-    
-def main():
-    
-    rospy.Subscriber("/joy", Joy, callback)
-    rospy.init_node("angelshark_joystick", anonymous=True)
-    rate = rospy.Rate(10) 
+    def print_state(self):
+        sys.stderr.write('\x1b[2J\x1b[H')
+        rospy.loginfo('\x1b[1M\r'
+                      '\033[34;1mSpeed: \033[32;1m%0.2f m/s, '
+                      '\033[34;1mSteering Angle: \033[32;1m%0.2f rad\033[0m',
+                      self.speed, self.steering_angle)
 
-    rate.sleep()
-    rospy.spin()                                                                                                                    
+    def finalize(self):
+        rospy.loginfo('Halting motors, aligning wheels and exiting...')
+        ackermann_cmd_msg = AckermannDrive()
+        ackermann_cmd_msg.speed = 0
+        ackermann_cmd_msg.steering_angle = 0
+        self.drive_pub.publish(ackermann_cmd_msg)
+        sys.exit()
+
 if __name__ == '__main__':
-    try:
-        main()
-    except rospy.ROSInterruptException:
-        pass
+    rospy.init_node('ackermann_drive_joyop_node')
+    joyop = AckermannDriveJoyop(sys.argv[1:len(sys.argv)])
+    rospy.spin()

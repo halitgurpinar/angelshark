@@ -1,128 +1,125 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
-
-import roslib; roslib.load_manifest('angelshark_teleop_keyboard')
+import roslib
 import rospy
-
-from geometry_msgs.msg import Twist
-
+from ackermann_msgs.msg import AckermannDriveStamped
+from std_msgs.msg import Float64
 import sys, select, termios, tty
+import thread
+from numpy import clip
 
-msg = """
-Reading from the keyboard  and Publishing to Twist!
----------------------------
-Moving around:
-   u    i    o
-   j    k    l
-   m    ,    .
-For Holonomic mode (strafing), hold down the shift key:
----------------------------
-   U    I    O
-   J    K    L
-   M    <    >
-t : up (+z)
-b : down (-z)
-anything else : stop
-q/z : increase/decrease max speeds by 10%
-w/x : increase/decrease only linear speed by 10%
-e/c : increase/decrease only angular speed by 10%
-CTRL-C to quit
-"""
+control_keys = {
+    'up'    : '\x41',
+    'down'  : '\x42',
+    'right' : '\x43',
+    'left'  : '\x44',
+    'space' : '\x20',
+    'tab'   : '\x09'}
 
-moveBindings = {
-    'i':(1,0,0,0),
-    'o':(1,0,0,-1),
-    'j':(0,0,0,1),
-    'l':(0,0,0,-1),
-    'u':(1,0,0,1),
-    ',':(-1,0,0,0),
-    '.':(-1,0,0,1),
-    'm':(-1,0,0,-1),
-    'O':(1,-1,0,0),
-    'I':(1,0,0,0),
-    'J':(0,1,0,0),
-    'L':(0,-1,0,0),
-    'U':(1,1,0,0),
-    '<':(-1,0,0,0),
-    '>':(-1,-1,0,0),
-    'M':(-1,1,0,0),
-    't':(0,0,1,0),
-    'b':(0,0,-1,0),
-}
-
-speedBindings={
-    'q':(1.1,1.1),
-    'z':(.9,.9),
-    'w':(1.1,1),
-    'x':(.9,1),
-    'e':(1,1.1),
-    'c':(1,.9),
-}
-
-def getKey():
-    tty.setraw(sys.stdin.fileno())
-    select.select([sys.stdin], [], [], 0)
-    key = sys.stdin.read(1)
-    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
-    return key
+key_bindings = {
+    '\x41' : ( 1.0 , 0.0),
+    '\x42' : (-1.0 , 0.0),
+    '\x43' : ( 0.0 , 1.0),
+    '\x44' : ( 0.0 ,-1.0),
+    '\x20' : ( 0.0 , 0.0),
+    '\x09' : ( 0.0 , 0.0)}
 
 
-def vels(speed,turn):
-	return "currently:\tspeed %s\tturn %s " % (speed,turn)
+class AckermannDriveKeyop:
 
-if __name__=="__main__":
-    settings = termios.tcgetattr(sys.stdin)
-    pub = rospy.Publisher('/angelshark/cmd_vel', Twist, queue_size = 1)
-    rospy.init_node('angelshark_teleop_keyboard')
+    def __init__(self, args):
+        if len(args) == 1:
+            max_speed = float(args[0])
+            max_steering_angle = float(args[0])
+        elif len(args) >= 2:
+            max_speed = float(args[0])
+            max_steering_angle = float(args[1])
+        else:
+            max_speed = 5.0
+            max_steering_angle = 2.5
 
-    speed = rospy.get_param("~speed", 0.3)
-    turn = rospy.get_param("~turn", 0.06)
-    x = 0
-    y = 0
-    z = 0
-    th = 0
-    status = 0
+        if len(args) > 2:
+            cmd_topic = '/' + args[2]
+        else:
+            cmd_topic = 'angelshark/ackermann_cmd'
 
-    try:
-        print(msg)
-        print(vels(speed,turn))
-        while(1):
-            key = getKey()
-            if key in moveBindings.keys():
-                x = moveBindings[key][0]
-                y = moveBindings[key][1]
-                z = moveBindings[key][2]
-                th = moveBindings[key][3]
-            elif key in speedBindings.keys():
-                speed = speed * speedBindings[key][0]
-                turn = turn * speedBindings[key][1]
+        self.speed_range = [-float(max_speed), float(max_speed)]
+        self.steering_angle_range = [-float(max_steering_angle),
+                                     float(max_steering_angle)]
+        for key in key_bindings:
+            key_bindings[key] = \
+                    (key_bindings[key][0] * float(max_speed) / 5,
+                     key_bindings[key][1] * float(max_steering_angle) / 5)
 
-                print(vels(speed,turn))
-                if (status == 14):
-                    print(msg)
-                status = (status + 1) % 15
+        self.speed = 0
+        self.steering_angle = 0
+        self.motors_pub = rospy.Publisher(
+            cmd_topic, AckermannDriveStamped, queue_size=1)
+        rospy.Timer(rospy.Duration(1.0/5.0), self.pub_callback, oneshot=False)
+        self.print_state()
+        self.key_loop()
+
+    def pub_callback(self, event):
+        ackermann_cmd_msg = AckermannDriveStamped()
+        ackermann_cmd_msg.drive.speed = self.speed
+        ackermann_cmd_msg.drive.steering_angle = self.steering_angle
+        self.motors_pub.publish(ackermann_cmd_msg)
+
+    def print_state(self):
+        sys.stderr.write('\x1b[2J\x1b[H')
+        rospy.loginfo('\x1b[1M\r*********************************************')
+        rospy.loginfo('\x1b[1M\rUse arrows to change speed and steering angle')
+        rospy.loginfo('\x1b[1M\rUse space to brake and tab to align wheels')
+        rospy.loginfo('\x1b[1M\rPress <ctrl-c> or <q> to exit')
+        rospy.loginfo('\x1b[1M\r*********************************************')
+        rospy.loginfo('\x1b[1M\r'
+                      '\033[34;1mSpeed: \033[32;1m%0.2f m/s, '
+                      '\033[34;1mSteer Angle: \033[32;1m%0.2f rad\033[0m',
+                      self.speed, self.steering_angle)
+
+    def get_key(self):
+        tty.setraw(sys.stdin.fileno())
+        select.select([sys.stdin], [], [], 0)
+        key = sys.stdin.read(1)
+        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, self.settings)
+        return key
+
+
+    def key_loop(self):
+        self.settings = termios.tcgetattr(sys.stdin)
+        while 1:
+            key = self.get_key()
+            if key in key_bindings.keys():
+                if key == control_keys['space']:
+                    self.speed = 0.0
+                elif key == control_keys['tab']:
+                    self.steering_angle = 0.0
+                else:
+                    self.speed = self.speed + key_bindings[key][0]
+                    self.steering_angle = \
+                            self.steering_angle + key_bindings[key][1]
+                    self.speed = clip(
+                        self.speed, self.speed_range[0], self.speed_range[1])
+                    self.steering_angle = clip(
+                        self.steering_angle,
+                        self.steering_angle_range[0],
+                        self.steering_angle_range[1])
+                self.print_state()
+            elif key == '\x03' or key == '\x71':  # ctr-c or q
+                break
             else:
-                x = 0
-                y = 0
-                z = 0
-                th = 0
-                if (key == '\x03'):
-                    break
+                continue
+        self.finalize()
 
-            twist = Twist()
-            twist.linear.x = x*speed; twist.linear.y = y*speed; twist.linear.z = z*speed;
-            twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = th*turn
-            pub.publish(twist)
+    def finalize(self):
+        rospy.loginfo('Halting motors, aligning wheels and exiting...')
+        self.settings = termios.tcgetattr(sys.stdin)
+        ackermann_cmd_msg = AckermannDriveStamped()
+        ackermann_cmd_msg.drive.speed = 0
+        ackermann_cmd_msg.drive.steering_angle = 0
+        self.motors_pub.publish(ackermann_cmd_msg)
+        sys.exit()
 
-    except Exception as e:
-        print(e)
-
-    finally:
-        twist = Twist()
-        twist.linear.x = 0; twist.linear.y = 0; twist.linear.z = 0
-        twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = 0
-        pub.publish(twist)
-
-        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
-
+if __name__ == '__main__':
+    rospy.init_node('ackermann_drive_keyop_node')
+    keyop = AckermannDriveKeyop(sys.argv[1:len(sys.argv)])
