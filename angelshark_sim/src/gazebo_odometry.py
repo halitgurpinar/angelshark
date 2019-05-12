@@ -35,7 +35,7 @@ class OdometryNode(object):
         rospy.Subscriber('/gazebo/link_states', LinkStates, self.sub_robot_pose_update)
 
     def sub_robot_pose_update(self, msg):
-        # Find the index of the racecar
+        # Find the index of the angelshark
         try:
             array_index = msg.name.index('angelshark::pars__base_link')
         except ValueError:
