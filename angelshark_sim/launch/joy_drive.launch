@@ -13,7 +13,7 @@
         <arg name="verbose" value="$(arg verbose)"/>
     </include>
 
-    <node pkg="angelshark_sim" name="angelshark_img_show" type="show_image.py" output="screen"></node>
+<!--     <node pkg="angelshark_sim" name="angelshark_img_show" type="show_image.py" output="screen"></node> -->
 
     <!-- Joy node -->
     <node respawn="true" pkg="joy" type="joy_node" name="angelshark_joy" >
