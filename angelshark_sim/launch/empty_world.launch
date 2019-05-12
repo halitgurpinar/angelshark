@@ -14,7 +14,8 @@
     <arg name="roll" default="0.0"/>
     <arg name="pitch" default="0.0"/>
     <arg name="yaw" default="0.0"/>
-    <!--   <arg name="rvizconfig" default="$(find car_demo)/rviz/demo.rviz" /> -->
+    
+    <arg name="rvizconfig" default="$(find angelshark_sim)/rviz/angelshark.rviz" />
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="gui" value="$(arg gui)"/>
@@ -22,7 +23,7 @@
         <arg name="world_name" value="$(arg world)"/>
     </include>
 
-    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="very_inaccurate_odom" args="0 0 0 0 0 0 odom base_link"/>-->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="very_inaccurate_odom" args="0 0 0 0 0 0 odom pars__base_link"/>
     
     <param name="robot_description" textfile="$(find angelshark_sim)/urdf/angelshark.urdf" />
  
@@ -45,6 +46,6 @@
     <!-- Allow for Gazebo to broadcast odom -->
     <node pkg="angelshark_sim" name="gazebo_odometry_node" type="gazebo_odometry.py"/>
 
-    <!--   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" /> -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
     
 </launch>
