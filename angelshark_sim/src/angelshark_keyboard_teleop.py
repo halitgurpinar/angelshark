@@ -28,8 +28,8 @@ key_bindings = {
 class AckermannDriveKeyop:
 
     def __init__(self):
-        max_speed = 8.0
-        max_steering_angle = 2.5
+        max_speed = 8.0            # m/s
+        max_steering_angle = 0.46  # radian
         cmd_topic = 'angelshark/ackermann_cmd'
 
         self.speed_range = [-float(max_speed), float(max_speed)]
