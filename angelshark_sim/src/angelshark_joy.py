@@ -8,8 +8,8 @@ import sys
 class AckermannDriveJoyop:
 
     def __init__(self):
-        self.max_speed = 8.0
-        self.max_steering_angle = 2.5
+        self.max_speed = 8.0            # m/s
+        self.max_steering_angle = 0.46  # radian
         cmd_topic = 'angelshark/ackermann_cmd'
 
         self.speed = 0
@@ -20,9 +20,9 @@ class AckermannDriveJoyop:
         rospy.Timer(rospy.Duration(1.0/5.0), self.pub_callback, oneshot=False)
         rospy.loginfo('ackermann_drive_joyop_node initialized')
 
-    def joy_callback(self, joy_msg):
-        self.speed = joy_msg.axes[2] * self.max_speed;
-        self.steering_angle = joy_msg.axes[3] * self.max_steering_angle;
+    def joy_callback(self, joy_msg): # left triger = joy_msg.axes[2]   ,   right triger = joy_msg.axes[5]   ,   right joypad = joy_msg.axes[3]
+        self.speed = (joy_msg.axes[2]-joy_msg.axes[5]) * self.max_speed;
+        self.steering_angle = -joy_msg.axes[3] * self.max_steering_angle;
 
 
     def pub_callback(self, event):
