@@ -21,6 +21,4 @@
         <arg name="yaw" value="-3.18294"/>
     </include>
 
-    <node pkg="angelshark_sim" name="angelshark_img_show" type="show_image.py" output="screen"></node>
-
 </launch>

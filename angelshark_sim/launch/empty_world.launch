@@ -14,8 +14,6 @@
     <arg name="roll" default="0.0"/>
     <arg name="pitch" default="0.0"/>
     <arg name="yaw" default="0.0"/>
-    
-    <arg name="rvizconfig" default="$(find angelshark_sim)/rviz/angelshark.rviz" />
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="gui" value="$(arg gui)"/>
@@ -45,7 +43,5 @@
     
     <!-- Allow for Gazebo to broadcast odom -->
     <node pkg="angelshark_sim" name="gazebo_odometry_node" type="gazebo_odometry.py"/>
-
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
     
 </launch>
