@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## update and install compilers
+sudo apt-get update && sudo apt-get install build-essential
+
 # ROS Melodic/Gazebo (ROS Melodic includes Gazebo9 by default)
 ## Gazebo simulator dependencies
 sudo apt install protobuf-compiler libeigen3-dev libopencv-dev -y
@@ -11,7 +14,7 @@ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C
 ## For keyserver connection problems substitute hkp://pgp.mit.edu:80 or hkp://keyserver.ubuntu.com:80 above.
 sudo apt update
 ## Get ROS/Gazebo
-sudo apt install ros-melodic-desktop-full ros-melodic-usb-cam ros-melodic-joy -y
+sudo apt install ros-melodic-desktop-full ros-melodic-usb-cam ros-melodic-joy ros-melodic-rosserial ros-melodic-rosserial-arduino ros-melodic-rosserial-python ros-melodic-ackermann-msgs ros-melodic-effort-controllers -y
 sudo apt install python-opencv python-pandas python-numpy python-cv-bridge -y
 ## Initialize rosdep
 sudo rosdep init
@@ -32,7 +35,7 @@ cd ~/catkin_ws
 sudo apt install python-rosinstall-generator python-catkin-tools -y
 
 ## Build!
-catkin build
+#catkin build
 ## Re-source environment to reflect new packages/build environment
 catkin_ws_source="source ~/catkin_ws/devel/setup.bash"
 if grep -Fxq "$catkin_ws_source" ~/.bashrc; then echo ROS catkin_ws setup.bash already in .bashrc; 
@@ -45,7 +48,7 @@ if [[ ! -z $unsupported_os ]]; then
     >&2 echo -e "expected you have been warned."
 fi
 
-sudo apt install libgazebo9-dev ros-melodic-gazebo9-dev ros-melodic-gazebo9-msgs ros-melodic-gazebo9-plugins ros-melodic-gazebo9-ros ros-melodic-gazebo9-ros-control ros-melodic-gazebo9-ros-pkgs -y
+sudo apt install libgazebo9-dev -y
 
 cd ~/catkin_ws/src
 git clone https://github.com/halitgurpinar/angelshark --recursive
