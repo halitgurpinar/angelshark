@@ -93,10 +93,16 @@ class DataExtractor(object):
             self.data_len += 1
             print "Data Length:",self.data_len
             self.rate.sleep()
-            
+
     def create_csv(self):
-        df = pd.DataFrame(data={"laser":self.list_laser,"steering_angle":self.list_steering_angle,
+        column_names = ["laser"+str(i) for i in range(len(self.laser_data))]
+
+        df_laser = pd.DataFrame(self.list_laser, columns=column_names)
+
+        df = pd.DataFrame(data={"steering_angle":self.list_steering_angle,
                                 "speed":self.list_speed})
+
+        df = pd.concat([df_laser, df], axis=1)
 
         target_file = os.path.expanduser(self.home_dir + '/Desktop/DataPacket/data.csv')
         exists = os.path.isfile(target_file)
