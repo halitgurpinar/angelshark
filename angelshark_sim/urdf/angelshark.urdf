@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <robot name="angelshark">
   
   <link name="pars__base_link"></link>
@@ -128,7 +128,7 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://angelshark_sim/models/hokuyo/meshes/hokuyo.dae"/>
-        <material name="grey" />
+        <material name="black" />
       </geometry>
     </visual>
   </link>
@@ -149,8 +149,8 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <box size="0.009 0.023 0.023"/>
+        <material name="green"/>
       </geometry>
-      <material name="green"/>
     </visual>
   </link>
   
@@ -225,6 +225,7 @@
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
       <alwaysOn>true</alwaysOn>
       <bodyName>pars__body</bodyName>
+      <frameName>pars__body</frameName>
       <topicName>angelshark/imu</topicName>
       <serviceName>imu_service</serviceName>
       <gaussianNoise>0.0</gaussianNoise>
@@ -263,6 +264,7 @@
     </sensor>
   </gazebo>
   <gazebo reference="camera_link">
+    <material>Gazebo/Green</material>
     <sensor type="camera" name="camera1">
       <visualize>false</visualize>
       <update_rate>30.0</update_rate>
