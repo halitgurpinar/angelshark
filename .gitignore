@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/vim,ros,code,linux,python,pycharm,komodoedit
-# Edit at https://www.gitignore.io/?templates=vim,ros,code,linux,python,pycharm,komodoedit
+# Created by https://www.gitignore.io/api/vim,ros,code,linux,python,pycharm,komodoedit,jupyternotebook,jupyternotebooks
+# Edit at https://www.gitignore.io/?templates=vim,ros,code,linux,python,pycharm,komodoedit,jupyternotebook,jupyternotebooks
 
 ### Code ###
 .vscode/*
@@ -8,6 +8,22 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+### JupyterNotebook ###
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Remove previous ipynb_checkpoints
+#   git rm -r .ipynb_checkpoints/
+#
+
+### JupyterNotebooks ###
+# gitignore template for Jupyter Notebooks
+# website: http://jupyter.org/
+
+
+# Remove previous ipynb_checkpoints
+#   git rm -r .ipynb_checkpoints/
 
 ### KomodoEdit ###
 *.komodoproject
@@ -186,7 +202,6 @@ docs/_build/
 target/
 
 # Jupyter Notebook
-.ipynb_checkpoints
 
 # IPython
 profile_default/
@@ -303,4 +318,4 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.gitignore.io/api/vim,ros,code,linux,python,pycharm,komodoedit
+# End of https://www.gitignore.io/api/vim,ros,code,linux,python,pycharm,komodoedit,jupyternotebook,jupyternotebooks
