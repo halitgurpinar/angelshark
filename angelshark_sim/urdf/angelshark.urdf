@@ -4,7 +4,7 @@
   <link name="pars__base_link"></link>
   <link name="pars__body">
     <inertial>
-      <mass value="92.0"/>
+      <mass value="140.0"/>
       <origin rpy="0 0 0" xyz="0  0  0.6"/>
       <inertia ixx="0.7" ixy="0" ixz="0" iyy="0.2" iyz="0" izz="0.8"/>
     </inertial>
@@ -23,7 +23,7 @@
   </link>
   <link name="pars__front_left_wheel">
     <inertial>
-      <mass value="1.0"/>
+      <mass value="4.8"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
     </inertial>
@@ -42,7 +42,7 @@
   </link>
   <link name="pars__front_right_wheel">
     <inertial>
-      <mass value="1.0"/>
+      <mass value="4.8"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
     </inertial>
@@ -61,7 +61,7 @@
   </link>
   <link name="pars__rear_left_wheel">
     <inertial>
-      <mass value="2.0"/>
+      <mass value="8.0"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
     </inertial>
@@ -80,7 +80,7 @@
   </link>
   <link name="pars__rear_right_wheel">
     <inertial>
-      <mass value="2.0"/>
+      <mass value="5.3"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
     </inertial>
@@ -99,16 +99,16 @@
   </link>
   <link name="pars__FLwheel_steer">
     <inertial>
-      <mass value="1.0"/>
+      <mass value="0.5"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+      <inertia ixx="0.005" ixy="0.00" ixz="0.00" iyy="0.005" iyz="0.00" izz="0.009"/>
     </inertial>
   </link>
   <link name="pars__FRwheel_steer">
     <inertial>
-      <mass value="1.0"/>
+      <mass value="0.5"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="0.03" ixy="0.00" ixz="0.00" iyy="0.03" iyz="0.00" izz="0.058"/>
+      <inertia ixx="0.005" ixy="0.00" ixz="0.00" iyy="0.005" iyz="0.00" izz="0.009"/>
     </inertial>
   </link>
   <!-- Laser scanner -->
@@ -157,20 +157,20 @@
   <joint name="pars__base_joint" type="fixed">
     <parent link="pars__base_link"/>
     <child link="pars__body"/>
-    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
     <axis xyz="0 1 0" />
   </joint>
   <joint name="pars__jFRsteer" type="revolute">
     <parent link="pars__body"/>
     <child link="pars__FRwheel_steer"/>
-    <origin rpy="0     1.5707 0" xyz="0.55 0.74 0.3"/>
+    <origin rpy="0     1.5707 0" xyz="0.585 0.735 0.3"/>
     <axis xyz="1 0 0"/>
     <limit effort="10.0" lower="-0.5235987756" upper="0.5235987756" velocity="30"/>
   </joint>
   <joint name="pars__jFLsteer" type="revolute">
     <parent link="pars__body"/>
     <child link="pars__FLwheel_steer"/>
-    <origin rpy="0     1.5707 0" xyz="-0.55  0.74  0.3"/>
+    <origin rpy="0     1.5707 0" xyz="-0.585  0.735  0.3"/>
     <axis xyz="1 0 0"/>
     <limit effort="10.0" lower="-0.5235987756" upper="0.5235987756" velocity="30"/>
   </joint>
@@ -191,14 +191,14 @@
   <joint name="pars__jRR" type="continuous">
     <parent link="pars__body"/>
     <child link="pars__rear_right_wheel"/>
-    <origin rpy="0     1.5707 0" xyz="0.3 -0.7  0.3"/>
+    <origin rpy="0     1.5707 0" xyz="0.425 -0.635  0.3"/>
     <axis xyz="0 0 -1"/>
     <limit effort="1000" velocity="30"/>
   </joint>
   <joint name="pars__jRL" type="continuous">
     <parent link="pars__body"/>
     <child link="pars__rear_left_wheel"/>
-    <origin rpy="0     1.5707 0" xyz="-0.3 -0.7  0.3"/>
+    <origin rpy="0     1.5707 0" xyz="-0.425 -0.635  0.3"/>
     <axis xyz="0 0 -1"/>
     <limit effort="1000" velocity="30"/>
   </joint>

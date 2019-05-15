@@ -9,7 +9,7 @@ class AckermannDriveJoyop:
 
     def __init__(self):
         self.max_speed = 8.0            # m/s
-        self.max_steering_angle = 0.46  # radian
+        self.max_steering_angle = 0.524  # radian
         cmd_topic = 'angelshark/ackermann_cmd'
 
         self.speed = 0
