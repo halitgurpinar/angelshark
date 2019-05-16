@@ -8,6 +8,8 @@
     <arg name="gui" default="true"/>
     <arg name="verbose" default="true"/>
     
+    <arg name="rvizconfig" default="$(find angelshark_sim)/rviz/angelshark.rviz" />
+    
     <arg name="x" default="0.0"/>
     <arg name="y" default="0.0"/>
     <arg name="z" default="0.0"/>
@@ -43,5 +45,7 @@
     
     <!-- Allow for Gazebo to broadcast odom -->
     <node pkg="angelshark_sim" name="gazebo_odometry_node" type="gazebo_odometry.py"/>
+    
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
     
 </launch>
