@@ -11,6 +11,8 @@ sudo apt install protobuf-compiler libeigen3-dev libopencv-dev -y
 ## Setup keys
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable bionic main" > /etc/apt/sources.list.d/gazebo-stable.list'
+wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 ## For keyserver connection problems substitute hkp://pgp.mit.edu:80 or hkp://keyserver.ubuntu.com:80 above.
 sudo apt update
 ## Get ROS/Gazebo
@@ -33,6 +35,7 @@ cd ~/catkin_ws
 
 ## Install dependencies
 sudo apt install python-rosinstall-generator python-catkin-tools -y
+sudo apt install gazebo9 libgazebo9-dev -y
 
 ## Build!
 #catkin build
@@ -47,8 +50,6 @@ if [[ ! -z $unsupported_os ]]; then
     >&2 echo -e "and continued with the installation, but if things are not working as"
     >&2 echo -e "expected you have been warned."
 fi
-
-sudo apt install libgazebo9-dev -y
 
 cd ~/catkin_ws/src
 git clone https://github.com/halitgurpinar/angelshark --recursive
