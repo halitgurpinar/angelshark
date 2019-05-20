@@ -30,8 +30,8 @@ eval $rossource
 sudo apt install python-rosinstall -y
 
 ## Create catkin workspace
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws
+mkdir -p ~/angelshark_ws/src
+cd ~/angelshark_ws
 
 ## Install dependencies
 sudo apt install python-rosinstall-generator python-catkin-tools -y
@@ -40,7 +40,7 @@ sudo apt install gazebo9 libgazebo9-dev -y
 ## Build!
 #catkin build
 ## Re-source environment to reflect new packages/build environment
-catkin_ws_source="source ~/catkin_ws/devel/setup.bash"
+catkin_ws_source="source ~/angelshark_ws/devel/setup.bash"
 if grep -Fxq "$catkin_ws_source" ~/.bashrc; then echo ROS catkin_ws setup.bash already in .bashrc; 
 else echo "$catkin_ws_source" >> ~/.bashrc; fi
 eval $catkin_ws_source
@@ -51,16 +51,16 @@ if [[ ! -z $unsupported_os ]]; then
     >&2 echo -e "expected you have been warned."
 fi
 
-cd ~/catkin_ws/src
+cd ~/angelshark_ws/src
 git clone https://github.com/halitgurpinar/angelshark --recursive
 
-cd ~/catkin_ws/src/angelshark/citysim
+cd ~/angelshark_ws/src/angelshark/citysim
 mkdir build
 cd build
 cmake ..
 sudo make install
 
-cd ~/catkin_ws
+cd ~/angelshark_ws
 rosdep install --from-paths src --ignore-src --rosdistro=melodic --os=ubuntu:bionic -y
 
 catkin_make
