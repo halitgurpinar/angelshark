@@ -1,8 +1,17 @@
 <?xml version="1.0"?>
 <launch>
-
+    <arg name="name_of_world" default="mcity"/>
+    <arg name="world" default="$(find angelshark_sim)/worlds/$(arg name_of_world).world"/>
+    <arg name="gui" default="false"/>
+    <arg name="verbose" default="false"/>
+    <arg name="rvizconfig" default="$(find angelshark_sim)/rviz/angelshark.rviz" />
+    
     <include file="$(find angelshark_sim)/launch/angelshark_sim.launch">
-        <arg name="name_of_world" default="mcity"/>
+        <arg name="name_of_world" value="$(arg name_of_world)"/>
+        <arg name="world" value="$(arg world)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="rvizconfig" value="$(arg rvizconfig)" />
     </include>
 
     <arg name="joy_dev" default="/dev/input/js0" />

@@ -1,8 +1,18 @@
 <?xml version="1.0"?>
 <launch>
-
+    
+    <arg name="name_of_world" default="pist1_construct"/>
+    <arg name="world" default="$(find angelshark_sim)/worlds/$(arg name_of_world).world"/>
+    <arg name="gui" default="false"/>
+    <arg name="verbose" default="false"/>
+    <arg name="rvizconfig" default="$(find angelshark_sim)/rviz/angelshark.rviz" />
+    
     <include file="$(find angelshark_sim)/launch/angelshark_sim.launch">
-        <arg name="name_of_world" default="pist1_construct"/>
+        <arg name="name_of_world" default="$(arg name_of_world)"/>
+        <arg name="world" value="$(arg world)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="rvizconfig" value="$(arg rvizconfig)" />
     </include>
 
     <node pkg="angelshark_sim" name="ackermann_drive_keyop_node" type="angelshark_keyboard_teleop.py" respawn="true" output="screen" ></node>
