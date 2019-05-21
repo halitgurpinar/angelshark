@@ -5,7 +5,8 @@
     <env name="GAZEBO_RESOURCE_PATH" value="$(find angelshark_sim)/citysim_files:${GAZEBO_RESOURCE_PATH}"/>
     <env name="GAZEBO_PLUGIN_PATH" value="$(find angelshark_sim)/citysim_files/plugins:${GAZEBO_PLUGIN_PATH}"/>
 
-    <arg name="world" default="$(find angelshark_sim)/worlds/empty.world"/>
+    <arg name="name_of_world" default="empty"/>
+    <arg name="world" default="$(find angelshark_sim)/worlds/$(arg name_of_world).world"/>
     <arg name="gui" default="true"/>
     <arg name="verbose" default="true"/>
     

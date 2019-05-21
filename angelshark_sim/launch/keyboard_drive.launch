@@ -1,41 +1,10 @@
 <?xml version="1.0"?>
 <launch>
-    <!-- world configs -->
-    <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find angelshark_sim)/models"/>
-    <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find angelshark_sim)/models"/>
 
-    <arg name="gui" default="false"/>
-    <arg name="verbose" default="true"/>
-
-    <arg name="world" default="$(find angelshark_sim)/worlds/pist1_construct.world"/>
-    
-    <arg name="x" value="38.04"/>
-    <arg name="y" value="35.36"/>
-    <arg name="z" value="1.5"/>
-    <arg name="roll" value="0.0"/>
-    <arg name="pitch" value="0.0"/>
-    <arg name="yaw" value="-3.18294"/>
-    
-    <arg name="rvizconfig" default="$(find angelshark_sim)/rviz/angelshark.rviz" />
-
-    <include file="$(find angelshark_sim)/launch/empty_world.launch">
-        <arg name="gui" value="$(arg gui)"/>
-        <arg name="verbose" value="$(arg verbose)"/>
-        <arg name="world" value="$(arg world)"/>
-        
-        <arg name="x" value="$(arg x)"/>
-        <arg name="y" value="$(arg y)"/>
-        <arg name="z" value="$(arg z)"/>
-        <arg name="roll" value="$(arg roll)"/>
-        <arg name="pitch" value="$(arg pitch)"/>
-        <arg name="yaw" value="$(arg yaw)"/>
-        
-        <arg name="rvizconfig" default="$(arg rvizconfig)" />
+    <include file="$(find angelshark_sim)/launch/angelshark_sim.launch">
+        <arg name="name_of_world" default="pist1_construct"/>
     </include>
 
-    <!--angelshark_sim Keyboard Teleop Node-->
     <node pkg="angelshark_sim" name="ackermann_drive_keyop_node" type="angelshark_keyboard_teleop.py" respawn="true" output="screen" ></node>
-    
-<!--     <node pkg="angelshark_sim" name="angelshark_img_show" type="show_image.py" output="screen"></node> -->
-    
+        
 </launch>
