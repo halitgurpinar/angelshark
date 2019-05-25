@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="angelshark_sim" name="ackermann_drive_keyop_node" type="angelshark_keyboard_teleop.py" respawn="true" output="screen" ></node>
+        
+</launch>

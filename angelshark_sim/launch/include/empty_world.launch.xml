@@ -19,6 +19,9 @@
     <arg name="pitch" default="0.0"/>
     <arg name="yaw" default="0.0"/>
 
+    <arg name="controller" default="false"/>
+    <arg name="controller_type" default="joy"/>
+
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="gui" value="$(arg gui)"/>
         <arg name="verbose" value="true"/>
@@ -50,4 +53,6 @@
     
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
     
+    <include if="$(eval arg('controller') and arg('controller_type') == 'keyboard')" file="$(find angelshark_sim)/launch/include/keyboard_drive.launch.xml" />
+    <include if="$(eval arg('controller') and arg('controller_type') == 'joy')" file="$(find angelshark_sim)/launch/include/joy_drive.launch.xml" />
 </launch>
