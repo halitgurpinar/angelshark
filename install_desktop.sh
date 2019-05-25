@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $EUID == 0 ]]; then
+    echo "Please do not run as root this script."
+    exit 1
+fi
+
 ## update and install compilers
 sudo apt-get update && sudo apt-get install build-essential
 
