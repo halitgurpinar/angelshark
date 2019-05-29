@@ -5,6 +5,13 @@
 
 <sdf version="1.6">
   <world name="default">
+    <plugin name="joy" filename="libJoyPlugin.so">
+      <sticky_buttons>false</sticky_buttons>
+      <dead_zone>0.05</dead_zone>
+      <rate>60</rate>
+      <accumulation_rate>1000</accumulation_rate>
+    </plugin>
+    
     <gui>
      <camera name="user_camera">
        <pose>-49.08 -1.911 6.95 0 0 -0.0159</pose>
@@ -225,8 +232,8 @@
     <road name="road_x_1">
 
       <width>8.4</width>
-      <point>-41.3 -100 5.0249999999999995</point>
-      <point>116.3 -100 5.0249999999999995</point>
+      <point>-41.3 -100 5.02</point>
+      <point>116.3 -100 5.02</point>
 
       
 
@@ -236,8 +243,8 @@
     <road name="road_x_2">
 
       <width>8.4</width>
-      <point>-41.3 -45 5.0249999999999995</point>
-      <point>116.3 -45 5.0249999999999995</point>
+      <point>-41.3 -45 5.02</point>
+      <point>116.3 -45 5.02</point>
 
       
       <material>
@@ -254,8 +261,8 @@
     <road name="road_x_3">
 
       <width>8.4</width>
-      <point>-41.3 0 5.0249999999999995</point>
-      <point>116.3 0 5.0249999999999995</point>
+      <point>-41.3 0 5.02</point>
+      <point>116.3 0 5.02</point>
 
       
 
@@ -265,8 +272,8 @@
     <road name="road_x_4">
 
       <width>8.4</width>
-      <point>-41.3 45 5.0249999999999995</point>
-      <point>116.3 45 5.0249999999999995</point>
+      <point>-41.3 45 5.02</point>
+      <point>116.3 45 5.02</point>
 
       
       <material>
@@ -283,8 +290,8 @@
     <road name="road_x_5">
 
       <width>8.4</width>
-      <point>-41.3 100 5.0249999999999995</point>
-      <point>116.3 100 5.0249999999999995</point>
+      <point>-41.3 100 5.02</point>
+      <point>116.3 100 5.02</point>
 
       
 
