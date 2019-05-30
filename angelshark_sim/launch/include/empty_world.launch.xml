@@ -51,7 +51,7 @@
     <!-- Allow for Gazebo to broadcast odom -->
     <node pkg="angelshark_sim" name="gazebo_odometry_node" type="gazebo_odometry.py"/>
     
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="false" />
     
     <include if="$(eval arg('controller') and arg('controller_type') == 'keyboard')" file="$(find angelshark_sim)/launch/include/keyboard_drive.launch.xml" />
     <include if="$(eval arg('controller') and arg('controller_type') == 'joy')" file="$(find angelshark_sim)/launch/include/joy_drive.launch.xml" />
