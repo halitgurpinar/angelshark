@@ -22,7 +22,7 @@ wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 sudo apt update
 ## Get ROS/Gazebo
 sudo apt install ros-melodic-desktop-full ros-melodic-usb-cam ros-melodic-joy ros-melodic-rosserial ros-melodic-rosserial-arduino ros-melodic-rosserial-python ros-melodic-ackermann-msgs ros-melodic-effort-controllers -y
-sudo apt install python-opencv python-pandas python-numpy python-cv-bridge -y
+sudo apt install python-opencv python-pandas python-numpy python-cv-bridge python-pip git -y
 ## Initialize rosdep
 sudo rosdep init
 rosdep update
@@ -33,6 +33,11 @@ else echo "$rossource" >> ~/.bashrc; fi
 eval $rossource
 ## Get rosinstall
 sudo apt install python-rosinstall -y
+
+## Install pygazebo
+git clone https://github.com/rootofarch/pygazebo /tmp/pygazebo
+cd /tmp/pygazebo/
+sudo python setup.py install
 
 ## Create catkin workspace
 mkdir -p ~/angelshark_ws/src
