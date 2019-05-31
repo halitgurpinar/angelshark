@@ -11,6 +11,8 @@ import pygazebo.msg.int_pb2
 
 import random
 
+import time
+
 first = [-1,1]
 second = [-2,2]
 third = [-3,3]
@@ -45,6 +47,7 @@ def publish_loop():
 
 
 def main():
+    time.sleep(10)
     rospy.init_node("traffic_lights_control",disable_signals=True)
     
     try:
