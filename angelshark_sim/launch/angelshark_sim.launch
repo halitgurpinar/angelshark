@@ -63,6 +63,6 @@
         <arg name="controller_type" value="$(arg controller_type)"/>
     </include>
     
-    <node pkg="angelshark_sim" type="traffic_lights_control.py" name="traffic_lights_control" if="$(eval arg('name_of_world') == 'citysim' or  arg('name_of_world') == 'citysim_without_car')" />
+    <node pkg="angelshark_sim" type="traffic_lights_control.py" name="traffic_lights_control" respawn="true" if="$(eval arg('name_of_world') == 'citysim' or  arg('name_of_world') == 'citysim_without_car')" />
 
 </launch>
