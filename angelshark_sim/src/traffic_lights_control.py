@@ -47,7 +47,6 @@ def publish_loop():
 
 
 def main():
-    time.sleep(10)
     rospy.init_node("traffic_lights_control",disable_signals=True)
     
     try:
