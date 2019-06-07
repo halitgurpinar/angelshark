@@ -70,7 +70,7 @@ class DataExtractor(object):
         
         target_file = os.path.expanduser(self.home_dir + '/Desktop/DataPacket/Images/1.jpg') # If there is old images in Images
         exists = os.path.isfile(target_file)
-        if exists and self.last_file_num == 0: # We get last image num in this if block
+        if exists and self.last_file_num == 0 and int(data_len) == 1: # We get last image num in this if block (data_len == 1 because want to get only in the first call)
             images_list = os.listdir(self.home_dir + '/Desktop/DataPacket/Images')
             images_list = [int(i.split('/')[-1].split('.')[0]) for i in images_list]
             self.last_file_num = sorted(images_list)[-1]
