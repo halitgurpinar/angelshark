@@ -10,6 +10,7 @@ import cv_bridge
 import cv2
 import numpy as np
 
+from time import sleep
 import json
 from keras.models import model_from_json
 
@@ -49,8 +50,9 @@ class PredictAngle():
         steering = out[0][0]
         speed = out[0][1]
 
-        print("Steering := %f" % steering)
-        print("Speed := %f" % speed)
+        #print("Steering := %f" % steering)
+        #print("Speed := %f" % speed)
+        rospy.logwarn("Steering := %f , Speed := %f", steering,speed)
 
         return {'steering': steering, 'speed': speed}
 
@@ -59,15 +61,15 @@ class PredictAngle():
             if self.camera_data is None:
                 rospy.logerr("No Image!")
                 continue
-
+            
             h = 240
             w = 320
-
+            
             image = self.camera_data
             image = cv2.resize(image, (w, h))
             image = image.reshape(1, h, w, 3)
             image = np.asarray(image).astype(np.float32) / 255.0
-
+            
             prediction = self.predict(image)
             
             msg = AckermannDriveStamped()
@@ -75,11 +77,13 @@ class PredictAngle():
             msg.drive.steering_angle = prediction['steering']
                     
             self.pub.publish(msg)
-
+            
             self.rate.sleep()
 
 def main():
     rospy.init_node('predict', anonymous=True)
+    
+    sleep(30)
     
     predict = PredictAngle()
     predict.cmd_publisher()
