@@ -25,5 +25,5 @@
     </include>
     
     <node pkg="angelshark_sim" type="traffic_lights_control.py" name="traffic_lights_control" respawn="true"/>
-    <node pkg="angelshark_deeplearning" type="predictor.py" name="predict" respawn="true" />
+    <node pkg="angelshark_deeplearning" type="predictor_laser.py" name="predict_with_laser" respawn="true" />
 </launch>
