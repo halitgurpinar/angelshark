@@ -11112,7 +11112,6 @@
       -1.57
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11126,7 +11125,6 @@
       -1.57
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11140,7 +11138,6 @@
       -1.57
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11154,7 +11151,6 @@
       -1.57
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11168,7 +11164,6 @@
       -1.57
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11182,7 +11177,6 @@
       1.57
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11196,7 +11190,6 @@
       1.57
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11210,7 +11203,6 @@
       1.57
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11224,7 +11216,6 @@
       0.0
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11238,7 +11229,6 @@
       0.0
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11252,7 +11242,6 @@
       0.0
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11266,7 +11255,6 @@
       3.14
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11280,7 +11268,6 @@
       3.14
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
     <include>
@@ -11294,7 +11281,6 @@
       3.14
       </pose>
       <uri>model://stop_light_post</uri>
-      <plugin name="libgzsitl_visflags_plugin" filename="libgzsitl_visflags_plugin.so" />
     </include>
 
 
