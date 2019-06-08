@@ -43,11 +43,13 @@ class PredictAngle():
             return
 
     def predict(self, image):
-        speed = 0.5
+        # speed = 0.5
         out = self.model.predict(image, batch_size=1)
         steering = out[0][0]
+        speed = out[0][1]
 
         print("Steering := %f" % steering)
+        print("Speed := %f" % speed)
 
         return {'steering': steering, 'speed': speed}
 
