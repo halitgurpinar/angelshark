@@ -44,6 +44,7 @@ class PredictAngle():
 
     def predict(self, image):
         # speed = 0.5
+        
         out = self.model.predict(image, batch_size=1)
         steering = out[0][0]
         speed = out[0][1]
@@ -65,6 +66,7 @@ class PredictAngle():
             image = self.camera_data
             image = cv2.resize(image, (w, h))
             image = image.reshape(1, h, w, 3)
+            image = np.asarray(image).astype(np.float32) / 255.0
 
             prediction = self.predict(image)
             
