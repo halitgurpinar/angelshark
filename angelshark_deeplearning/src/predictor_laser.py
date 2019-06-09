@@ -37,9 +37,9 @@ class PredictAngle():
     def laser_callback(self, msg):
         self.laser_data = msg.ranges
 
-    def predict(self, image,laser_arr):
+    def predict(self, laser_arr):
         # speed = 0.5
-        out = self.model.predict([laser_arr], batch_size=1)
+        out = self.model.predict(laser_arr, batch_size=1)
         steering = out[0][0]
         speed = out[0][1]
         
