@@ -53,7 +53,7 @@ class PredictAngle():
         #print("Speed := %f" % speed)
         rospy.logwarn("Steering := %f , Speed(FIX) := %f", steering,speed)
 
-        return {'steering': steering, 'speed(FIX)': speed}
+        return {'steering': steering, 'speed': speed}
 
     def cmd_publisher(self):
         while not rospy.is_shutdown():
@@ -66,7 +66,8 @@ class PredictAngle():
             
             image = self.camera_data
             image = cv2.resize(image, (w, h))
-            image = image.reshape(1, h, w, 3)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            image = image.reshape(1, h, w, 1)
             image = np.asarray(image).astype(np.float32) / 255.0
             
             prediction = self.predict(image)
@@ -82,7 +83,7 @@ class PredictAngle():
 def main():
     rospy.init_node('predictor_camera_one_output', anonymous=True)
     
-    sleep(30)
+    sleep(10)
     
     predict = PredictAngle()
     predict.cmd_publisher()
