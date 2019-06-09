@@ -97,7 +97,7 @@ class PredictAngle():
 def main():
     rospy.init_node('predictor_camera_laser', anonymous=True)
     
-    #sleep(30)
+    sleep(30)
     
     predict = PredictAngle()
     predict.cmd_publisher()
