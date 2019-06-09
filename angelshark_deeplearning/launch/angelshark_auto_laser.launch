@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <arg name="name_of_world" default="citysim_without_car"/>
+    <arg name="name_of_world" default="pist1_construct"/>
     <arg name="world" default="$(find angelshark_sim)/worlds/$(arg name_of_world).world"/>
     <arg name="gui" default="true"/>
     <arg name="verbose" default="true"/>
@@ -14,16 +14,15 @@
         <arg name="verbose" value="$(arg verbose)"/>
         <arg name="rvizconfig" value="$(arg rvizconfig)" />
         <arg name="world" value="$(arg world)"/>
-        <arg name="x" value="-40.057703"/>
-        <arg name="y" value="0"/>
-        <arg name="z" value="5.063065"/>
+        <arg name="x" value="38.04"/>
+        <arg name="y" value="35.36"/>
+        <arg name="z" value="1.5"/>
         <arg name="roll" value="0.0"/>
         <arg name="pitch" value="0.0"/>
-        <arg name="yaw" value="-1.575650"/>
+        <arg name="yaw" value="-3.18294"/>
         <arg name="controller" value="$(arg controller)"/>
         <arg name="controller_type" value="$(arg controller_type)"/>
     </include>
     
-    <node pkg="angelshark_sim" type="traffic_lights_control.py" name="traffic_lights_control" respawn="true"/>
-    <node pkg="angelshark_deeplearning" type="predictor_laser.py" name="predict_with_laser" respawn="true" />
+    <node pkg="angelshark_deeplearning" type="predictor_laser.py" name="predictor_laser" respawn="true" />
 </launch>
